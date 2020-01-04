@@ -219,6 +219,10 @@ class TLTask(template.BaseExperiment):
         os.chdir(self.data_directory)
 
     def make_block(self):
+        """Makes a block of trials.
+
+        Returns a shuffled list of trials created by self.make_trial.
+        """
         trial_list = []
 
         for set_size in self.set_sizes:
@@ -233,7 +237,9 @@ class TLTask(template.BaseExperiment):
     @staticmethod
     def _which_quad(loc):
         """Checks which quad a location is in.
+
         This method is used by generate_locations to ensure the max_per_quad condition is followed.
+
         Parameters:
         loc -- A list of two values (x,y) in visual angle.
         """
@@ -248,7 +254,9 @@ class TLTask(template.BaseExperiment):
 
     def _too_close(self, attempt, locs):
         """Checks that an attempted location is valid.
+
         This method is used by generate_locations to ensure the min_distance condition is followed.
+
         Parameters:
         attempt -- A list of two values (x,y) in visual angle.
         locs -- A list of previous successful attempts to be checked.
@@ -263,6 +271,13 @@ class TLTask(template.BaseExperiment):
         return False
 
     def generate_locations(self, set_size):
+        """Creates the locations for a trial. A helper function for self.make_trial.
+
+        Returns a list of acceptable locations (as multiple [x, y] lists).
+
+        Parameters:
+        set_size -- The number of stimuli for this trial.
+        """
         if self.max_per_quad is not None:
             # quad boundries (x1, x2, y1, y2)
             quad_count = [0, 0, 0, 0]
@@ -292,6 +307,21 @@ class TLTask(template.BaseExperiment):
         return locs
 
     def make_trial(self, set_size):
+        """Creates a single trial dict. A helper function for self.make_block.
+
+        Returns the trial dict with the following fields:
+            - set_size
+            - cresp
+            - locations
+            - rotations
+            - stimuli
+            - test_location
+
+        Stimuli and rotations are randomly generated.
+
+        Parameters:
+        set_size -- The number of stimuli for this trial.
+        """
         test_location = random.randint(0, set_size - 1)
 
         locs = self.generate_locations(set_size)
@@ -330,9 +360,10 @@ class TLTask(template.BaseExperiment):
         self.display_text_screen(text=break_text, bg_color=[204, 255, 204])
 
     def display_blank(self, wait_time):
-        """Displays a fixation cross. A helper function for self.run_trial.
+        """Displays a blank screen. A helper function for self.run_trial.
+
         Parameters:
-        wait_time -- The amount of time the fixation should be displayed for.
+        wait_time -- The amount of time the blank should be displayed for.
         """
 
         self.experiment_window.flip()
@@ -340,7 +371,13 @@ class TLTask(template.BaseExperiment):
         psychopy.core.wait(wait_time)
 
     def display_search(self, coordinates, rotations, stimuli):
+        """Displays the search array.
 
+        Parameters:
+        coordinates -- A list of lists containing x,y coordinates in visual degrees
+        rotations -- a list of rotations (int 0 - 360) to apply to the images
+        stimuli -- A list of "T", "L1" and "L2" describing which image file to load
+        """
         for pos, ori, stim in zip(coordinates, rotations, stimuli):
             if stim == "T":
                 path = self.T_stim_path
@@ -356,8 +393,11 @@ class TLTask(template.BaseExperiment):
 
     def get_response(self, allow_quit=True):
         """Waits for a response from the participant. A helper function for self.run_trial.
-        Pressing Q while the function is wait for a response will quit the experiment.
+
         Returns the pressed key and the reaction time.
+
+        Parameters:
+        allow_quit -- If True, adds "Q" to the acceptable key list and quits on Q press.
         """
 
         rt_timer = psychopy.core.MonotonicClock()
@@ -375,8 +415,10 @@ class TLTask(template.BaseExperiment):
 
     def send_data(self, data):
         """Updates the experiment data with the information from the last trial.
+
         This function is seperated from run_trial to allow additional information to be added
         afterwards.
+
         Parameters:
         data -- A dict where keys exist in data_fields and values are to be saved.
         """
@@ -384,7 +426,9 @@ class TLTask(template.BaseExperiment):
 
     def run_trial(self, trial, block_num, trial_num):
         """Runs a single trial.
+
         Returns the data from the trial after getting a participant response.
+
         Parameters:
         trial -- The dictionary of information about a trial.
         block_num -- The number of the block in the experiment.
@@ -416,7 +460,7 @@ class TLTask(template.BaseExperiment):
         return data
 
     def run(self):
-        """Runs the entire experiment if the file is run directly."""
+        """Runs the entire experiment."""
 
         self.chdir()
 
