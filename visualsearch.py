@@ -213,21 +213,29 @@ class TLTask(template.BaseExperiment):
         return locs
 
     def make_trial(self, set_size):
-        idx = random.randint(0, len(self.possible_orientations) - 1)
-        cresp = self.keys[idx]
-        ori = self.possible_orientations[idx]
-
-        test_location = random.choice(range(set_size))
+        test_location = random.randint(0, set_size - 1)
 
         locs = self.generate_locations(set_size)
-        oris = [random.choice([0, 90, 180, 270]) for _ in range(set_size)]
+
+        ori_idx = [random.randint(0, len(self.possible_orientations) - 1) for _ in range(set_size)]
+        oris = [self.possible_orientations[i] for i in ori_idx]
+
+        replacement_orientations = {
+            'left': 0,
+            'up': 0,
+            'right': 0,
+            'down': 0
+        }
+
+        oris = [replacement_orientations[ori] for ori in oris]
+
+        cresp = [self.keys[i] for i in ori_idx]
 
         stims = [random.choice(['L1', 'L2']) for _ in range(set_size)]
         stims[test_location] = 'T'
 
         trial = {
             'set_size': set_size,
-            'orientation': ori,
             'cresp': cresp,
             'locations': locs,
             'rotations': oris,
@@ -324,7 +332,7 @@ class TLTask(template.BaseExperiment):
             'LocationTested': trial['test_location'],
             'Locations': json.dumps(trial['locations']),
             'Rotations': json.dumps(trial['rotations']),
-            'Stimuli': '""' + json.dumps(trial['stimuli']) + '""',
+            'Stimuli': '"' + json.dumps(trial['stimuli']) + '"',
         }
 
         return data
