@@ -51,3 +51,23 @@ Additional keyword arguments are sent to template.BaseExperiment().
 - run_trial -- Runs a single trial.
 - run -- Runs the entire experiment.
 - send_data -- Updates the experiment data with the information from the last trial.
+
+## Hooks
+
+Hooks can be sent to the `run` method in order to allow for small changes to be made without having to completely rewrite the run method in a subclass.
+
+#### Available Hooks
+
+- setup_hook -- takes self, executed once the window is open.
+- before_first_trial_hook -- takes self, executed after instructions are displayed.
+- pre_block_hook -- takes self and the block list, executed immediately before block start.
+    Can optionally return an altered block list.
+- pre_trial_hook -- takes self and the trial dict, executed immediately before trial start.
+    Can optionally return an altered trial dict.
+- post_trial_hook -- takes self and the trial data, executed immediately after trial end.
+    Can optionally return altered trial data to be stored.
+- post_block_hook -- takes self, executed at end of block before break screen (including
+    last block).
+- end_experiment_hook -- takes self, executed immediately before end experiment screen.
+
+#### Hook Example
