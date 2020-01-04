@@ -107,7 +107,7 @@ questionaire_dict = {
 class TLTask(template.BaseExperiment):
     def __init__(self, number_of_trials_per_block=number_of_trials_per_block,
                  number_of_blocks=number_of_blocks, set_sizes=set_sizes, stim_size=stim_size,
-                 possible_orientations=possible_orientations, keys=keys,
+                 possible_orientations=possible_orientations, keys=keys, stim_path=stim_path,
                  allowed_deg_from_fix=allowed_deg_from_fix, min_distance=min_distance,
                  max_per_quad=max_per_quad, instruct_text=instruct_text, iti_time=iti_time,
                  data_directory=data_directory, questionaire_dict=questionaire_dict, **kwargs):
@@ -135,9 +135,10 @@ class TLTask(template.BaseExperiment):
 
         self.data_directory = data_directory
         self.questionaire_dict = questionaire_dict
-        self.T_stim_path = os.path.join(os.getcwd(), 'stim/T.png')
-        self.L1_stim_path = os.path.join(os.getcwd(), 'stim/L1.png')
-        self.L2_stim_path = os.path.join(os.getcwd(), 'stim/L2.png')
+
+        self.T_stim_path = os.path.join(stim_path, 'T.png')
+        self.L1_stim_path = os.path.join(stim_path, 'L1.png')
+        self.L2_stim_path = os.path.join(stim_path, 'L2.png')
 
         self.trials_per_set_size = number_of_trials_per_block / len(set_sizes)
 
