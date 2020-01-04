@@ -1,3 +1,24 @@
+"""A basic T and L visual search experiment.
+
+Author - Colin Quirk (cquirk@uchicago.edu)
+
+Repo: https://github.com/colinquirk/PsychopyVisualSearch
+
+T and L search is a common attention paradigm. Unlike other visual search tasks, this task
+forces participants to search serially, resulting in increasing RT with set size
+(e.g. Wolfe, Cave, Franzel, 1989). If this file is run directly, the defaults at the top of the
+page will be used. To make simple changes, you can adjust any of these values. For more in depth
+changes you will need to overwrite the methods yourself.
+
+Note: this code relies on my templateexperiments module. You can get it from
+https://github.com/colinquirk/templateexperiments and either put it in the same folder as this
+code or give the path to psychopy in the preferences.
+
+Classes:
+TLTask -- The class that runs the experiment.
+    See 'print TLTask.__doc__' for simple class docs or help(TLTask) for everything.
+"""
+
 import errno
 import json
 import os
