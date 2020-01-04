@@ -71,3 +71,25 @@ Hooks can be sent to the `run` method in order to allow for small changes to be 
 - end_experiment_hook -- takes self, executed immediately before end experiment screen.
 
 #### Hook Example
+
+For example, if you wanted a block of practice trials, you could simply define a function:
+
+```
+# Arbitrary function name
+def my_before_first_trial_hook(self):
+    # Self refers to the experiment object
+    self.display_text_screen('We will now do a practice block.')
+    practice_block = self.make_block()
+    for trial_num, trial in enumerate(practice_block):
+        self.run_trial(trial, 'practice', trial_num)
+    self.display_break()
+    self.display_text_screen('Good job! We will now start the real trials.')
+```
+
+Then simply pass the hook into run.
+
+```
+exp.run(before_first_trial_hook=before_first_trial_hook)
+```
+
+Just like that, you have modified the experiment without having to change anything about the underlying implementation!
