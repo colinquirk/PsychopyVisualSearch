@@ -221,15 +221,14 @@ class TLTask(template.BaseExperiment):
         oris = [self.possible_orientations[i] for i in ori_idx]
 
         replacement_orientations = {
-            'left': 0,
+            'left': 270,
             'up': 0,
-            'right': 0,
-            'down': 0
+            'right': 90,
+            'down': 180
         }
 
         oris = [replacement_orientations[ori] for ori in oris]
-
-        cresp = [self.keys[i] for i in ori_idx]
+        cresp = self.keys[ori_idx[test_location]]
 
         stims = [random.choice(['L1', 'L2']) for _ in range(set_size)]
         stims[test_location] = 'T'
