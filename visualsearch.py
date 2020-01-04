@@ -324,7 +324,7 @@ class TLTask(template.BaseExperiment):
             'LocationTested': trial['test_location'],
             'Locations': json.dumps(trial['locations']),
             'Rotations': json.dumps(trial['rotations']),
-            'Stimuli': json.dumps('""' + trial['stimuli'] + '""'),
+            'Stimuli': '""' + json.dumps(trial['stimuli']) + '""',
         }
 
         return data
