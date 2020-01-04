@@ -41,7 +41,7 @@ iti_time = 1
 
 distance_to_monitor = 90
 
-data_directory = os.path.join(os.path.expanduser('~'), 'Desktop', 'ChangeDetection', 'Data')
+data_directory = os.path.join(os.path.expanduser('~'), 'Desktop', exp_name, 'Data')
 
 data_fields = [
     'Subject',
