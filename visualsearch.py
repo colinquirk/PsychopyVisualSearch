@@ -114,8 +114,11 @@ class TLTask(template.BaseExperiment):
 
         self.number_of_trials_per_block = number_of_trials_per_block
         self.number_of_blocks = number_of_blocks
+
         self.set_sizes = set_sizes
+
         self.stim_size = stim_size
+
         self.possible_orientations = possible_orientations
         self.keys = keys
 
@@ -125,8 +128,11 @@ class TLTask(template.BaseExperiment):
         self.allowed_deg_from_fix = allowed_deg_from_fix
         self.min_distance = min_distance
         self.max_per_quad = max_per_quad
+
         self.instruct_text = instruct_text
+
         self.iti_time = iti_time
+
         self.data_directory = data_directory
         self.questionaire_dict = questionaire_dict
         self.T_stim_path = os.path.join(os.getcwd(), 'stim/T.png')
