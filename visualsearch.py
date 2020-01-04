@@ -37,7 +37,7 @@ import template
 exp_name = 'VisualSearch'
 
 number_of_trials_per_block = 10
-number_of_blocks = 5
+number_of_blocks = 2
 
 set_sizes = [2, 6, 10, 14, 18]
 
