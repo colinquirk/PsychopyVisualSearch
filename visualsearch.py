@@ -331,7 +331,7 @@ class TLTask(template.BaseExperiment):
             'LocationTested': trial['test_location'],
             'Locations': json.dumps(trial['locations']),
             'Rotations': json.dumps(trial['rotations']),
-            'Stimuli': '"' + json.dumps(trial['stimuli']) + '"',
+            'Stimuli': str(trial['stimuli']),  # avoids double quotes issues
         }
 
         return data
