@@ -12,18 +12,14 @@ import psychopy.visual
 
 import template
 
-
+# Things you probably want to change
 exp_name = 'VisualSearch'
 
 number_of_trials_per_block = 10
-number_of_blocks = 2
-set_sizes = [6]
-stim_size = 1.5  # visual degrees, used for X and Y
-possible_orientations = ['left', 'up', 'right', 'down']
-keys = ['left', 'up', 'right', 'down']  # keys indexes should match with possible_orientations
-allowed_deg_from_fix = 6
-min_distance = 2.5
-max_per_quad = 2  # int or None for totally random displays
+number_of_blocks = 5
+
+set_sizes = [2, 6, 10, 14, 18]
+
 instruct_text = [
     ('Welcome to the experiment. Press space to begin.'),
     ('In this experiment you will be searching for "T"s.\n\n'
@@ -37,12 +33,28 @@ instruct_text = [
      'You will get breaks in between blocks.\n\n'
      'Press space to continue.'),
 ]
-iti_time = 1
-
-distance_to_monitor = 90
 
 data_directory = os.path.join(os.path.expanduser('~'), 'Desktop', exp_name, 'Data')
+# Feel free to hardcode to your system if this file will be imported
+stim_path = os.path.join(os.getcwd(), 'stim')
 
+# Things you probably don't need to change, but can if you want to
+stim_size = 1  # visual degrees, used for X and Y
+
+possible_orientations = ['left', 'up', 'right', 'down']
+keys = ['left', 'up', 'right', 'down']  # keys indexes should match with possible_orientations
+
+allowed_deg_from_fix = 6
+# minimum euclidean distance between centers of stimuli in visual angle
+# min_distance should be greater than stim_size
+min_distance = 2
+max_per_quad = None  # int or None for totally random displays
+
+iti_time = 1  # seconds
+
+distance_to_monitor = 90  # cm
+
+# data_fields must match input to send_data
 data_fields = [
     'Subject',
     'Block',
@@ -90,6 +102,8 @@ questionaire_dict = {
 }
 
 
+# This is the logic that runs the experiment
+# Change anything below this comment at your own risk
 class TLTask(template.BaseExperiment):
     def __init__(self, number_of_trials_per_block=number_of_trials_per_block,
                  number_of_blocks=number_of_blocks, set_sizes=set_sizes, stim_size=stim_size,
