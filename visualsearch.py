@@ -410,11 +410,15 @@ class TLTask(template.BaseExperiment):
         if allow_quit:
             keys += ['q']
 
+        resp = None
         if self.response_time_limit is not None:
             resp = psychopy.event.waitKeys(
                 maxWait=self.response_time_limit, keyList=keys, timeStamped=rt_timer)
         else:
             resp = psychopy.event.waitKeys(keyList=keys, timeStamped=rt_timer)
+
+        if resp is None:
+            return None, None
 
         if 'q' in resp[0]:
             self.quit_experiment()
