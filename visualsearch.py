@@ -45,8 +45,7 @@ set_sizes = [2, 6, 10, 14, 18]
 instruct_text = [
     ('Welcome to the experiment. Press space to begin.'),
     ('In this experiment you will be searching for "T"s.\n\n'
-     'Each trial will start with a fixation cross. '
-     'Then, 6 items will appear.\n\n'
+     'On each trial, multiple items will appear.\n\n'
      'One will be a "T" and the others will be offset "L"s.\n\n'
      'The "T" can appear in any orientation.\n\n'
      'Once you find the "T", press the arrow key associated with the top of the "T".\n\n'
