@@ -40,7 +40,7 @@ exp_name = 'VisualSearch'
 number_of_trials_per_block = 10
 number_of_blocks = 2
 
-set_sizes = [6]
+set_sizes = [2, 6, 10, 14, 18]
 
 instruct_text = [
     ('Welcome to the experiment. Press space to begin.'),
@@ -72,8 +72,8 @@ allowed_deg_from_fix = 6
 min_distance = 2
 max_per_quad = None  # int or None for totally random displays
 
-iti_time = 2  # seconds
-response_time_limit = 1  # None or int in seconds
+iti_time = 1  # seconds
+response_time_limit = None  # None or int in seconds
 
 distance_to_monitor = 90  # cm
 
