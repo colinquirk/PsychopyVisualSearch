@@ -32,6 +32,7 @@ TLTask -- The class that runs the experiment.
 - number_of_trials_per_block -- The number of trials within each block.
 - possible_orientations -- A list of strings possibly including "left", "up", "right", or "down"
 - questionaire_dict -- Questions to be included in the dialog.
+- response_time_limit -- How long in seconds the participant has to respond.
 - set_sizes -- A list of all the set sizes. An equal number of trials will be shown for each set
     size.
 - stim_path -- A string containing the path to the stim folder
