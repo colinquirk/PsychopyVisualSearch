@@ -72,6 +72,7 @@ min_distance = 2
 max_per_quad = None  # int or None for totally random displays
 
 iti_time = 1  # seconds
+response_time_limit = None  # None or int in seconds
 
 distance_to_monitor = 90  # cm
 
@@ -168,7 +169,8 @@ class TLTask(template.BaseExperiment):
                  possible_orientations=possible_orientations, keys=keys, stim_path=stim_path,
                  allowed_deg_from_fix=allowed_deg_from_fix, min_distance=min_distance,
                  max_per_quad=max_per_quad, instruct_text=instruct_text, iti_time=iti_time,
-                 data_directory=data_directory, questionaire_dict=questionaire_dict, **kwargs):
+                 data_directory=data_directory, questionaire_dict=questionaire_dict,
+                 response_time_limit=response_time_limit, **kwargs):
 
         self.number_of_trials_per_block = number_of_trials_per_block
         self.number_of_blocks = number_of_blocks
@@ -179,6 +181,8 @@ class TLTask(template.BaseExperiment):
 
         self.possible_orientations = possible_orientations
         self.keys = keys
+
+        self.response_time_limit = response_time_limit
 
         if len(self.keys) != len(self.possible_orientations):
             raise ValueError('Length of keys and possible_orientations must be equal.')
@@ -406,7 +410,11 @@ class TLTask(template.BaseExperiment):
         if allow_quit:
             keys += ['q']
 
-        resp = psychopy.event.waitKeys(keyList=keys, timeStamped=rt_timer)
+        if self.response_time_limit is not None:
+            resp = psychopy.event.waitKeys(
+                maxWait=self.response_time_limit, keyList=keys, timeStamped=rt_timer)
+        else:
+            resp = psychopy.event.waitKeys(keyList=keys, timeStamped=rt_timer)
 
         if 'q' in resp[0]:
             self.quit_experiment()
