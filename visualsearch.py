@@ -453,6 +453,7 @@ class TLTask(template.BaseExperiment):
         self.display_search(trial['locations'], trial['rotations'], trial['stimuli'])
 
         resp, rt = self.get_response()
+        self.experiment_window.flip()
 
         acc = 1 if resp == trial['cresp'] else 0
 
